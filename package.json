@@ -1,0 +1,22 @@
+{
+  "name": "stemmer",
+  "version": "0.1.0",
+  "scripts": {
+    "clean": "bsb -clean-world",
+    "build": "bsb -make-world",
+    "watch": "bsb -make-world -w",
+    "test": "jest"
+  },
+  "keywords": [
+    "BuckleScript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "bs-platform": "^3.0.0",
+    "jest": "^22.4.3"
+  },
+  "jest": {
+    "testRegex": "_(spec|test)."
+  }
+}
