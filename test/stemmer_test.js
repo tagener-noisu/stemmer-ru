@@ -6,4 +6,8 @@ describe("Stemmer.r*", () => {
   it("finds rv correctly", () => {
     expect(Stemmer.rv(word)).toEqual("тивоестественном");
   });
+
+  it("finds r1 correctly", () => {
+    expect(Stemmer.r1(word)).toEqual("ивоестественном");
+  });
 });
