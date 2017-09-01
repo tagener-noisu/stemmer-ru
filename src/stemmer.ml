@@ -11,3 +11,10 @@ let rv word =
     match word |. reg_match regex with
   | Some([|_;result |]) -> result
   | _ -> ""
+
+
+let r1 word =
+  let regex = regExp {j|$vowel$consonant(.+)\$|j} "i" in
+    match word |. reg_match regex with
+  | Some([|_;result |]) -> result
+  | _ -> ""
