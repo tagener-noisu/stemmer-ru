@@ -10,4 +10,8 @@ describe("Stemmer.r*", () => {
   it("finds r1 correctly", () => {
     expect(Stemmer.r1(word)).toEqual("ивоестественном");
   });
+
+  it("finds r2 correctly", () => {
+    expect(Stemmer.r2(word)).toEqual("оестественном");
+  });
 });
