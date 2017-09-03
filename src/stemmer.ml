@@ -18,3 +18,5 @@ let r1 word =
     match word |. reg_match regex with
   | Some([|_;result |]) -> result
   | _ -> ""
+
+let r2 word = r1(r1 word)
