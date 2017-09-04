@@ -15,3 +15,12 @@ describe("Stemmer.r*", () => {
     expect(Stemmer.r2(word)).toEqual("оестественном");
   });
 });
+
+describe("Stemmer endings", () => {
+  it("correctly removes perfective gerund's ending", () => {
+    expect(Stemmer.from_perfective_gerund("взяв")).toBe("взя");
+    expect(Stemmer.from_perfective_gerund("взявши")).toBe("взя");
+    expect(Stemmer.from_perfective_gerund("взявшись")).toBe("взя");
+    expect(Stemmer.from_perfective_gerund("взевшись")).toBe("взевшись");
+  });
+});
