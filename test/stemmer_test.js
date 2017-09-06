@@ -23,4 +23,8 @@ describe("Stemmer endings", () => {
     expect(Stemmer.from_perfective_gerund("взявшись")).toBe("взя");
     expect(Stemmer.from_perfective_gerund("взевшись")).toBe("взевшись");
   });
+
+  it("correctly removes adjective's ending", () => {
+    expect(Stemmer.from_adjective("красный")).toBe("красн");
+  });
 });
