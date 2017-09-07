@@ -14,6 +14,12 @@ let from_perfective_gerund word =
       word
       |. replace group_one "$1"
         |. replace group_two ""
+  
+  
+let from_adjective word =
+  word |. replace
+  [%bs.re "/(?:[еиыо][ейм]у?)|(?:[уеою]ю|[ая]я|[ыи]х|[ео]го)$/i"]
+""
 
 let rv word =
   let regex = regExp {j|$consonant*$vowel(.+)\$|j} "i" in
