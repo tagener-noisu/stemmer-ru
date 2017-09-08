@@ -27,4 +27,9 @@ describe("Stemmer endings", () => {
   it("correctly removes adjective's ending", () => {
     expect(Stemmer.from_adjective("красный")).toBe("красн");
   });
+
+  it("correctly removes participle's ending", () => {
+    expect(Stemmer.from_participle("кидаем")).toBe("кида");
+    expect(Stemmer.from_participle("худющ")).toBe("худ");
+  });
 });
