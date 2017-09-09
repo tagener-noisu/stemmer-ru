@@ -32,4 +32,8 @@ describe("Stemmer endings", () => {
     expect(Stemmer.from_participle("кидаем")).toBe("кида");
     expect(Stemmer.from_participle("худющ")).toBe("худ");
   });
+
+  it("correctly removes reflexive's ending", () => {
+    expect(Stemmer.from_reflexive("слоняясь")).toBe("слоняя");
+  });
 });
