@@ -21,6 +21,16 @@ let from_adjective word =
   [%bs.re "/(?:[еиыо][ейм]у?)|(?:[уеою]ю|[ая]я|[ыи]х|[ео]го)$/i"]
 ""
 
+let from_reflexive word =
+  word |. replace[%bs.re "/с[яь]$/i"] ""
+
+let from_participle word =
+  let group_one = [%bs.re "/([ая])(?:ем|нн|вш|ющ)$/i"] in
+    let group_two = [%bs.re "/(?:щ|ивш|ывш|ющ)$/i"] in
+      word
+      |. replace group_one "$1"
+        |. replace group_two ""
+
 let rv word =
   let regex = regExp {j|$consonant*$vowel(.+)\$|j} "i" in
     match word |. reg_match regex with
