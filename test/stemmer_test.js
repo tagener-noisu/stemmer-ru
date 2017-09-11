@@ -36,4 +36,9 @@ describe("Stemmer endings", () => {
   it("correctly removes reflexive's ending", () => {
     expect(Stemmer.from_reflexive("слоняясь")).toBe("слоняя");
   });
+
+  it("correctly removes verb ending", () => {
+    expect(Stemmer.from_verb("сломаете")).toBe("слома");
+    expect(Stemmer.from_verb("выпил")).toBe("вып");
+  });
 });
