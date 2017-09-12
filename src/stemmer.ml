@@ -30,6 +30,13 @@ let from_participle word =
       word
       |. replace group_one "$1"
         |. replace group_two ""
+  
+let from_verb word =
+  let group_one = [%bs.re "/([ая])(?:е(?:м|т|шь)|[йн]|ли?|[ей]те|[лн]о|ют|ны|ть|нно|[дн]а)$/i"] in
+    let group_two = [%bs.re "/(?:[ыи]л[аио]?|[иы]м|ен[ао]?|[еу]й(?:те)?|[ияы]т|[иы]ть|ите|ены|у[ею]т|у?ю|ишь)$/i"] in
+      word
+      |. replace group_one "$1"
+        |. replace group_two ""
 
 let rv word =
   let regex = regExp {j|$consonant*$vowel(.+)\$|j} "i" in
