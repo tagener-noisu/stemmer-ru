@@ -41,4 +41,9 @@ describe("Stemmer endings", () => {
     expect(Stemmer.from_verb("сломаете")).toBe("слома");
     expect(Stemmer.from_verb("выпил")).toBe("вып");
   });
+
+  it("correctly removes noun ending", () => {
+    expect(Stemmer.from_noun("покров")).toBe("покр");
+    expect(Stemmer.from_noun("гора")).toBe("гор");
+  });
 });
