@@ -37,6 +37,9 @@ let from_verb word =
       word
       |. replace group_one "$1"
         |. replace group_two ""
+  
+let from_noun word =
+  word |. replace[%bs.re "/(?:[ео]в|[иь]е|(?:а|и?я)ми?|[ие]и|(?:а|и?я)х|[иь][юя]|и?ем|о[мй]|[еи]?й|[аеоюыьуя])$/i"] ""
 
 let rv word =
   let regex = regExp {j|$consonant*$vowel(.+)\$|j} "i" in
