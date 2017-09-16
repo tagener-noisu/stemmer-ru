@@ -46,4 +46,9 @@ describe("Stemmer endings", () => {
     expect(Stemmer.from_noun("покров")).toBe("покр");
     expect(Stemmer.from_noun("гора")).toBe("гор");
   });
+
+  it("correctly removes superlative ending", () => {
+    expect(Stemmer.from_superlative("старейш")).toBe("стар");
+    expect(Stemmer.from_superlative("старейше")).toBe("стар");
+  });
 });
