@@ -51,4 +51,8 @@ describe("Stemmer endings", () => {
     expect(Stemmer.from_superlative("старейш")).toBe("стар");
     expect(Stemmer.from_superlative("старейше")).toBe("стар");
   });
+
+  it("correctly removes derivational ending", () => {
+    expect(Stemmer.from_derivational("неприятность")).toBe("неприятн");
+  });
 });
