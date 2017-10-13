@@ -3,13 +3,24 @@ external reg_match : string -> Js.Re.t -> string array option
 external replace : string -> Js.Re.t -> string -> string = ""[@@bs.send]
 external regExp : string -> string -> Js.Re.t = "RegExp"[@@bs.new]
 
+type replace_result = | Replace of string | Done of string [@@bs.deriving ]
+
+(* chainable replace function, replaces only once in a chain *)
+let replace word regex replace_val =
+  match word with
+    | Done word -> Done word
+    | Replace word ->
+      let result = word |. replace regex replace_val in
+        if result == word then Replace word
+        else Done result
+
 let vowel = {j|[аеёиоуыэюя]|j}
 let consonant = {j|[^аеёиоуыэюя]|j}
 
 let from_perfective_gerund word =
-  let group_one = [%bs.re "/([ая])в(?:шись|ши)?$/i"] in
-  let group_two = [%bs.re "/[иы]в(?:шись|ши)?$/i"] in
-  word
+  let group_one = [%bs.re "/([ая])(?:вшись|вши|в)$/i"] in
+  let group_two = [%bs.re "/[иы](?:вшись|вши|в)$/i"] in
+  Replace word
   |. replace group_one "$1"
   |. replace group_two ""
   
