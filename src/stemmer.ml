@@ -1,16 +1,13 @@
-external reg_match : string -> Js.Re.t -> string array option
-  = "match"[@@bs.send][@@bs.return nullable] 
-external replace : string -> Js.Re.t -> string -> string = ""[@@bs.send]
-external regExp : string -> string -> Js.Re.t = "RegExp"[@@bs.new]
+open Regexp;;
 
-type replace_result = | Replace of string | Done of string [@@bs.deriving ]
+type replace_result = | Replace of string | Done of string [@@bs.deriving accessors]
 
 (* chainable replace function, replaces only once in a chain *)
 let replace word regex replace_val =
   match word with
     | Done word -> Done word
     | Replace word ->
-      let result = word |. replace regex replace_val in
+      let result = String.replace word regex replace_val in
         if result == word then Replace word
         else Done result
 
@@ -57,13 +54,13 @@ let from_derivational word =
 
 let rv word =
   let regex = regExp {j|$consonant*$vowel(.+)\$|j} "i" in
-    match word |. reg_match regex with
+    match String.reg_match word regex with
     | Some([|_;result |]) -> result
     | _ -> ""
 
 let r1 word =
   let regex = regExp {j|$vowel$consonant(.+)\$|j} "i" in
-    match word |. reg_match regex with
+    match String.reg_match word regex with
     | Some([|_;result |]) -> result
     | _ -> ""
 
