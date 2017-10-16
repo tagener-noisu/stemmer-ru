@@ -1,14 +1,14 @@
 open Regexp;;
 
-type replace_result = | Replace of string | Done of string [@@bs.deriving accessors]
+type replace_result = | ToReplace of string | Done of string [@@bs.deriving accessors]
 
 (* chainable replace function, replaces only once in a chain *)
 let replace word regex replace_val =
   match word with
     | Done word -> Done word
-    | Replace word ->
+    | ToReplace word ->
       let result = String.replace word regex replace_val in
-        if result == word then Replace word
+        if result == word then ToReplace word
         else Done result
 
 let vowel = {j|[аеёиоуыэюя]|j}
@@ -17,7 +17,7 @@ let consonant = {j|[^аеёиоуыэюя]|j}
 let from_perfective_gerund word =
   let group_one = [%bs.re "/([ая])(?:вшись|вши|в)$/i"] in
   let group_two = [%bs.re "/[иы](?:вшись|вши|в)$/i"] in
-  Replace word
+  ToReplace word
   |. replace group_one "$1"
   |. replace group_two ""
   
