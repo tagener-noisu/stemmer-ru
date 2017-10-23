@@ -17,7 +17,7 @@ let consonant = {j|[^аеёиоуыэюя]|j}
 let from_perfective_gerund word =
   let group_one = [%bs.re "/([ая])(?:вшись|вши|в)$/i"] in
   let group_two = [%bs.re "/[иы](?:вшись|вши|в)$/i"] in
-  ToReplace word
+  word
   |. replace group_one "$1"
   |. replace group_two ""
   
