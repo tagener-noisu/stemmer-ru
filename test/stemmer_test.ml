@@ -10,3 +10,11 @@ let _ = describe "from_perfective_gerund" (fun _ ->
 	let _ = it "should not remove endings if match fails"
 		(fun _ -> expect result toEqual (ToReplace {j|взевшись|j})) in
 ())
+
+let _ = describe "rv" (fun _ ->
+	let _ = it "should split word after first vowel"
+		(fun _ -> expect (rv {j|ололо|j}) toEqual ({j|о|j}, {j|лоло|j})) in
+
+	let _ = it "should not split if there are no vowels"
+		(fun _ -> expect (rv {j|вжжж|j}) toEqual ({j|вжжж|j}, "")) in
+())
