@@ -53,10 +53,10 @@ let from_derivational word =
   word |. replace [%bs.re "/ость?$/i"] ""
 
 let rv word =
-  let regex = regExp {j|$consonant*$vowel(.+)\$|j} "i" in
+  let regex = regExp {j|($consonant*$vowel)(.+)\$|j} "i" in
     match String.reg_match word regex with
-    | Some([|_;result |]) -> result
-    | _ -> ""
+    | Some([|_; hd; tl|]) -> (hd, tl)
+    | _ -> (word, "")
 
 let r1 word =
   let regex = regExp {j|$vowel$consonant(.+)\$|j} "i" in
