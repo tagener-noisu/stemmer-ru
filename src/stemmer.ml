@@ -52,6 +52,14 @@ let from_superlative word =
 let from_derivational word =
   word |. replace [%bs.re "/ость?$/i"] ""
 
+let from_adjectival word =
+  match word |> from_adjective with
+  | ToReplace word -> ToReplace word
+  | Done word ->
+    match ToReplace word |> from_participle with
+    | ToReplace word -> Done word
+    | Done word -> Done word
+
 let rv word =
   let regex = regExp {j|($consonant*$vowel)(.+)\$|j} "i" in
     match String.reg_match word regex with
